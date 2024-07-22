@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: MV SLIDER
+ * Plugin Name: MV_SLIDER
  * Plugin URI: https://visck.io
  * Description: My Plugin's decription
  * Version: 1.0
