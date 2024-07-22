@@ -35,6 +35,8 @@ deny access directly
 if (! defined ('ABSPATH')){
     die ( ' You are not able to access directly , please access through Wordpress'); 
     exit;
+
+    
 }
 
 /* creating class with verification block, this accept than other
@@ -67,6 +69,24 @@ if ( ! class_exists('MV_Slider') ){
  
         }
 
+        /** setting methods for activate, deactivate and unistall my plugin in the main class */
+        /** I won't pass my methods through class constructor in this time, but I could. */
+
+        /** I'll call all before to instance my classes  */
+        public static function activate (){
+            update_option('rewrite_rules', '');
+        }
+
+        public static function deactivate (){
+            flush_rewrite_rules();
+
+        }
+
+        public static function unistall(){
+
+        
+        }
+
     }
 }
 
@@ -74,6 +94,14 @@ if ( ! class_exists('MV_Slider') ){
 
 /** verify if class exist then we need to do */
 if ( class_exists ('MV_Slider')){
+
+    register_activation_hook( __FILE__, array('MV_Slider', 'activate'  ));
+    /** for reference some method inside the class, I need to use array
+     * Inside array I insert the class name, then method name all in string type
+     *  */ 
+
+     register_deactivation_hook( __FILE__, array('MV_Slider', 'deactivate'  ));
+     register_uninstall_hook( __FILE__, array('MV_Slider', 'uninstall'  ));
 
     /** create a variable for my to instance my class*/
     /** if add my variable by NEW with variable and () then I'll calling together with Construct method , then 
